@@ -1,0 +1,14 @@
+{
+  "name": "lab5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./input.css -o ./output.css --watch"
+  },
+  "author": "Kenan Casey",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwind": "^4.0.0"
+  }
+}

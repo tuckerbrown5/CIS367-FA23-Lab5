@@ -1,0 +1,139 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+ background-color: blue;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: teal;
+    height: 100vh;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+    background-color: aquamarine;
+    /* height: 600px; */
+    width:100%;
+    /* overflow: auto; */
+
+    position: relative;
+    /* border: 5px solid salmon; */
+}
+
+
+.box {
+    background-color: cadetblue;
+    height: 500px;
+    max-height: 500px;
+    aspect-ratio: 2.5/3.5;
+    position: absolute;
+    border: 2px solid goldenrod;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s ease-in-out;
+
+}
+
+.active 
+{
+    z-index: 150;
+    left: 500px;
+
+}
+
+#prevButton {
+    position: absolute;
+    left:0;
+    font-size: 3rem;
+    transform: translateX(-30px);
+    z-index: 150;
+}
+
+
+#nextButton {
+    position: absolute;
+    right:0;
+    font-size: 3rem;
+    transform: translateX(30px);
+    z-index: 150;
+}
+
+
+.left {
+    background-color: crimson;
+    opacity: 0.5;
+    /* left:0; */
+    /* max-height: 400px; */
+}
+
+.one {
+    /* transform: translateX(0); */
+    left:0;
+    max-height: 325px;
+    
+}
+
+.two {
+    /* transform: translateX(20px); */
+    left:20px;
+    max-height: 350px;
+}
+
+.three {
+    /* transform: translateX(40px); */
+    left: 40px;
+    max-height: 375px;
+}
+
+.four {
+    /* transform: translateX(60px); */
+    left: 60px;
+    max-height: 400px;
+}
+
+.right {
+    background-color: seagreen;
+    opacity: 0.5;
+    /* right:0; */
+    height: 400px;
+}
+
+
+.five {
+    right:60px;
+    max-height: 400px;
+    z-index: 8;
+}
+
+.six {
+    /* transform: translateX(40px); */
+    right: 40px;
+    max-height: 375px;
+    z-index: 7;
+}
+
+.seven {
+    /* transform: translateX(20px); */
+    right:20px;
+    max-height: 350px;
+    z-index: 6;
+}
+
+.eight {
+    /* transform: translateX(0); */
+    right:0;
+    max-height: 325px;
+    z-index: 5;
+}
