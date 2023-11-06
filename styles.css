@@ -44,6 +44,8 @@ body{
     justify-content: center;
     align-items: center;
     transition: all 1s ease-in-out;
+    transform: translateX(0);
+    
 }
 
 .active 
@@ -72,7 +74,7 @@ body{
 
 .left {
     background-color: crimson;
-    opacity: 0.5;
+    /* opacity: 0.5; */
     /* left:0; */
     /* max-height: 400px; */
 }
@@ -104,7 +106,7 @@ body{
 
 .right {
     background-color: seagreen;
-    opacity: 0.5;
+    /* opacity: 0.5; */
     /* right:0; */
     /* height: 400px; */
 }
