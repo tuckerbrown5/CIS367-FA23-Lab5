@@ -1,115 +1,94 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const API_URL = "https://fhu-faculty-api.netlify.app/fhu-faculty.json";
+    const carousel = document.getElementById("carousel");
+    let activeIndex = 0;
+    let people = [];
 
-const data = ["zero","one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"];
-
-const carousel = document.getElementsByClassName("carousel")[0];
-var activeIndex = Math.floor(data.length/2);
-
-
-function addCards() {
-    
-    data.forEach( (item, index) => {
+    function createCardElement(person) {
         let div = document.createElement('div');
         div.classList.add("box");
-    
-        // if( index < activeIndex){
-        //     div.classList.add("left");
-        //     const offset = windowWidth/2 - cardWidth/2 - index * 10;
-        //     div.style.transform = `translateX(${-offset}px)`;
-        //     div.zIndex = index
-        //     //div.style.left = `${index*10}px`;
-        //     //div.style.transform+=` scale(${ Math.pow(0.9, length-index+1)})`;
-        // }
-        // else if(index === activeIndex)
-        // {
-        //     div.classList.add("active");
-        // }
-        // else {
-        //     div.classList.add("right");
-        //     const offset = windowWidth/2 - cardWidth/2 - (length - index+1) * 10;
-        //     console.log(offset)
-        //     div.style.transform = `translateX(${offset}px)`;
-        //     div.style.zIndex = (length - index);
-        //     div.style.right  = `${offset}px`
-        // }
-    
-        div.innerHTML = `${index} ${item}`
-    
-        carousel.appendChild(div);
-    });
-}
+        div.innerHTML = `
+            <div class="grid-individual-card card-background-yellow">
+                <div class="header-basic-title">${person.Rank}</div>
+                <div class="header-profile-name">${person.FirstName} ${person.LastName}</div>
+                <div class="header-hp">${person.HitPoints} HP</div>
+                <div class="header-icon">☻</div>
+                <img src="https://fhu-faculty-api.netlify.app/images/headshots/${person.Image}" alt="${person.FirstName} ${person.LastName}">
+                <div class="description-below-image">
+                    <span class="description-below-image-background">${person.Department} Type-${person.Type}, ${person.EducationLevel} in ${person.FieldofStudy}</span>
+                </div>
+                <div class="skill-cost">☻ ☻</div>
+                <div class="skill-description skill-center"><span class="skill-name">${person.Attack1}</span></div>
+                <div class="skill-damage">${person.Attack1Damage}</div>
+                <div class="skill-cost">☻ ☻ ☻</div>
+                <div class="skill-description">
+                    <span class="skill-name">${person.Attack2}</span> Flip a coin. If tails, ${person.FirstName} does 10 damage to themselves.
+                </div>
+                <div class="skill-damage">${person.Attack2Damage}</div>
+                <div class="weakness wrr-header">Weakness</div>
+                <div class="resistance wrr-header">Resistance</div>
+                <div class="retreat wrr-header">Retreat Cost</div>
+                <div class="weakness wrr-value">☻</div>
+                <div class="resistance wrr-value">${person.Resistances || ""}</div>
+                <div class="retreat wrr-value">${"☻ ".repeat(person.RetreatCost)}</div>
+                <div class="description-above-footer">
+                    <ul>
+                        <li class="description-above-footer-border">${person.FirstName} ${person.LastName}, known for the hashtag ${person.HashTag}. Resistant to ${person.Resistances}, weak to ${person.Weaknesses}. LV. ${person.Level} ${person.Gender}</li>
+                    </ul>
+                </div>
+                <div class="copyright">
+                    <strong>● Tucker Brown</strong> ©2023, CIS367. <strong>${person.ID}/59 ●</strong>
+                </div>
+            </div>
+        `;
+        return div;
+    }
 
-addCards();
-updateCards();
+    async function addAllCards() {
+        try {
+            let response = await fetch(API_URL);
+            people = await response.json();
 
-function updateCards() {
+            people.forEach((person, index) => {
+                let cardElement = createCardElement(person);
+                if (index === activeIndex) {
+                    cardElement.classList.add("active");
+                }
+                carousel.appendChild(cardElement);
+            });
 
-    var windowWidth = window.innerWidth;
-    console.log(windowWidth);
-    var cardWidth = 350;
-    const length = data.length;
-
-    const boxes = document.querySelectorAll(".carousel .box");
-    
-    boxes.forEach( (div, index) => {
-      
-        //let div = document.createElement('div');
-        //div.classList.add("box");
-    
-        if( index < activeIndex){
-            //div.classList.add("left");
-            div.classList.remove("active");
-            //const offset = windowWidth/2 - cardWidth/2 - index * 10;
-            // div.style.transform = `translateX(${-offset}px)`;
-            
-            div.style.zIndex = index;
-            const offset = 100+(length-index)*2;
-            div.style.transform = `translateX(-${offset}%) scale(100%)`;
-           
-            // div.style.left = `${index*8}px`
-            //div.style.transform+=` scale(${ Math.pow(0.9, length-index+1)})`;
+            updateCards();
+        } catch (error) {
+            console.error("Failed to fetch and create cards:", error);
         }
-        else if(index === activeIndex)
-        {
-            div.classList.add("active");
-            div.style.zIndex = 300;
-            div.style.transform = `translateX(0) scale(120%)`;
+    }
 
-        }
-        else {
-            //div.classList.add("right");
-            div.classList.remove("active");
-            // const offset = windowWidth/2 - cardWidth/2 - (length - index+1) * 10;
-            // console.log(offset)
-            // div.style.transform = `translateX(${offset}px)`;
-            div.style.zIndex = (length - index);
-            const offset = 100+(index)*2;
+    function updateCards() {
+        const boxes = document.querySelectorAll(".carousel .box");
+        boxes.forEach((box, index) => {
+            if (index === activeIndex) {
+                box.style.transform = 'translateX(0)';
+                box.classList.add("active");
+            } else {
+                box.style.transform = `translateX(${100 * (index - activeIndex)}%)`;
+                box.classList.remove("active");
+            }
+        });
+    }
 
-            div.style.transform = `translateX(${offset}%) scale(100%)`;
-
-            // div.style.right = `${ (length-index)*8}px`
-            //div.style.right  = `${offset}px`
+    document.getElementById("prevButton").addEventListener("click", () => {
+        if (activeIndex > 0) {
+            activeIndex--;
+            updateCards();
         }
     });
 
-}
+    document.getElementById("nextButton").addEventListener("click", () => {
+        if (activeIndex < people.length - 1) {
+            activeIndex++;
+            updateCards();
+        }
+    });
 
-window.addEventListener("resize", updateCards);
-
-
-document.getElementById("prevButton").addEventListener("click", ()=>{
-    if( activeIndex >= 0)
-    {
-        activeIndex--;
-        updateCards();
-    }
-    
-});
-
-document.getElementById("nextButton").addEventListener("click", ()=>{
-    if( activeIndex < data.length)
-    {
-        activeIndex++;
-        updateCards();
-    }
-    
+    addAllCards();
 });
