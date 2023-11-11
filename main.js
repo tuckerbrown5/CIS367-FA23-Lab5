@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCards();
         }
     });
+    
 
     addAllCards();
 });

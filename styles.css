@@ -293,3 +293,40 @@ ul {
 #prevButton:hover, #nextButton:hover {
     transform: translateY(-50%) scale(1.15);
 }
+.like-button,
+.share-button,
+.dislike-button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.like-button:hover,
+.share-button:hover,
+.dislike-button:hover {
+    background-color: #4682b4; /* steel blue */
+    color: white;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-around; /* This keeps the buttons spaced out evenly */
+    align-items: center; /* This would center them vertically, but may not be necessary */
+    margin-top: auto; /* Pushes the buttons to the bottom of the card container */
+    padding: 10px;
+}
+
+.liked {
+    background-color: green;
+    color: white;
+}
+
+.disliked {
+    background-color: red;
+    color: white;
+}
+
+
+
