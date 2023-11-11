@@ -1,66 +1,24 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background-color: #222;
+    background-color: #a8a8a8; /* gray */
 }
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    max-width: 1400px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-}
-
-.carousel {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-}
-.box {
-    width: 315px; /* Set the width of the box to match the individual card width */
-    height: 600px; /* Adjust if needed */
-    margin: 10px auto; /* Center the box and add margin */
-    border-radius: 16px;
-    position: relative;
-    z-index: 1;
-    display: flex; /* Use flexbox to center the card vertically and horizontally */
-    align-items: center; /* Align items vertically */
-    justify-content: center; /* Align items horizontally */
-    overflow: hidden; /* In case content overflows */
-    transition: transform 0.5s ease-in-out;
-    flex-shrink: 0;
-}
-
-
 
 .grid-card-container {
     display: grid;
-    grid-template-columns: repeat(4, auto); /* This will create four columns */
+    grid-template-columns: auto auto auto auto;
     background-color: #a8a8a8; /* gray */
-    grid-gap: 50px; /* Space between cards */
+    grid-gap: 50px;
 }
 
 .grid-individual-card {
     width: 315px;
     height: 500px;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto auto;
     border: 10px solid #4682b4; /* steel blue */
     border-radius: 20px;
     padding: 5px;
-    display: grid; /* Changed from inline-grid to grid */
-    grid-template-columns: repeat(6, auto); /* Simplified the declaration */
     justify-content: center;
 }
-
 
 
 .card-background-blue {
@@ -260,39 +218,6 @@ ul {
     padding-top: 5px;
 }
 
-.box.active {
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-.btn {
-    z-index: 3;
-    background-color: rgba(100,100,100,0.5);
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    transition: transform 300ms ease-in;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-#prevButton {
-    left: 20px;
-}
-
-#nextButton {
-    right: 20px;
-}
-
-#prevButton:hover, #nextButton:hover {
-    transform: translateY(-50%) scale(1.15);
-}
 .like-button,
 .share-button,
 .dislike-button {
@@ -327,6 +252,5 @@ ul {
     background-color: red;
     color: white;
 }
-
 
 
